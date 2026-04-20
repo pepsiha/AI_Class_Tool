@@ -619,7 +619,45 @@ const PAGES = [
   </div>`
 },
 
-// ══ 11 / 14  第五段・定義第二堂作業・引言投影片 ══════════════
+// ══ 今日紀錄彙整（前置總結）════════════════════════════════════
+{
+  section:'今日紀錄',title:'今日紀錄彙整',
+  notes:`<ul>
+    <li>此頁為第四段結束後使用，自動彙整前四段所有白板記錄</li>
+    <li>先總結前面討論，再帶入第五段作業定義</li>
+    <li>一鍵複製後貼到群組通訊軟體，或列印留存</li>
+  </ul>`,
+  render:()=>{
+    const p3=whiteboardData[3]||'';
+    const p5q0=whiteboardData['5_q0']||'', p5q1=whiteboardData['5_q1']||'', p5q2=whiteboardData['5_q2']||'';
+    const p7ai=whiteboardData['7_ai']||'', p7s=whiteboardData['7_self']||'';
+    const p9s1=whiteboardData['9_s1']||'', p9s2=whiteboardData['9_s2']||'', p9s3=whiteboardData['9_s3']||'', p9s4=whiteboardData['9_s4']||'';
+    const row=(label,content)=>`<div class="summary-entry">
+      <div class="summary-entry-title">📌 ${label}</div>
+      <div class="summary-content ${content?'':'summary-empty'}">${content?escHtml(content):'（本段落尚未有記錄）'}</div>
+    </div>`;
+    const toolRows=[['拿到資料',p9s1],['理解內容',p9s2],['整理重點',p9s3],['產出成品',p9s4],['人工確認','永遠是人']].map(([s,t])=>`${s}：${t||'（未填）'}`).join('\n');
+    return `<div class="card">
+      <div class="export-bar">
+        <button class="export-btn export-copy" onclick="copyAll()">📋 一鍵複製全部紀錄</button>
+        <button class="export-btn export-print" onclick="window.print()">🖨 列印此頁</button>
+        <span class="copy-feedback" id="copy-feedback">✓ 已複製！</span>
+      </div>
+      ${row('開場破冰・各組工具與情境關鍵字', p3)}
+      ${row('現況攤牌・問題 1 各組回應', p5q0)}
+      ${row('現況攤牌・問題 2 各組回應', p5q1)}
+      ${row('現況攤牌・問題 3 各組回應', p5q2)}
+      ${row('痛點共鳴・AI 的問題', p7ai)}
+      ${row('痛點共鳴・自己的問題', p7s)}
+      <div class="summary-entry">
+        <div class="summary-entry-title">📌 工具角色對齊・各步驟工具</div>
+        <div class="summary-content">${escHtml(toolRows)}</div>
+      </div>
+    </div>`;
+  }
+},
+
+// ══ 第五段・定義第二堂作業・引言投影片 ══════════════
 {
   section:'第五段・定義第二堂作業',title:'段落引言',
   notes:`<div class="script">「第二堂課之前，我只請大家做一件事：從今天白板上的痛點裡，選一個你們組最有感的問題，用你們最熟悉的工具去試著解決一次。不管結果好不好，第二堂課來說你們做了什麼。做成功的，分享為什麼成功。做失敗的，更歡迎，分享為什麼失敗、卡在哪裡。」</div>
@@ -706,46 +744,6 @@ const PAGES = [
     </div>
   </div></div>`
 },
-
-// ══ 14 / 14  今日紀錄彙整 ════════════════════════════════════
-{
-  section:'今日紀錄',title:'今日紀錄彙整',
-  notes:`<ul>
-    <li>此頁為課程結束後使用，自動彙整所有白板記錄</li>
-    <li>一鍵複製後貼到群組通訊軟體，或列印留存</li>
-    <li>若有漏記，可回到各段落白板補充後再回此頁</li>
-  </ul>`,
-  render:()=>{
-    const p3=whiteboardData[3]||'';
-    const p5q0=whiteboardData['5_q0']||'', p5q1=whiteboardData['5_q1']||'', p5q2=whiteboardData['5_q2']||'';
-
-    const p7ai=whiteboardData['7_ai']||'', p7s=whiteboardData['7_self']||'';
-    const p9s1=whiteboardData['9_s1']||'', p9s2=whiteboardData['9_s2']||'', p9s3=whiteboardData['9_s3']||'', p9s4=whiteboardData['9_s4']||'';
-    const row=(label,content)=>`<div class="summary-entry">
-      <div class="summary-entry-title">📌 ${label}</div>
-      <div class="summary-content ${content?'':'summary-empty'}">${content?escHtml(content):'（本段落尚未有記錄）'}</div>
-    </div>`;
-    const toolRows=[['拿到資料',p9s1],['理解內容',p9s2],['整理重點',p9s3],['產出成品',p9s4],['人工確認','永遠是人']].map(([s,t])=>`${s}：${t||'（未填）'}`).join('\n');
-    return `<div class="card">
-      <div class="export-bar">
-        <button class="export-btn export-copy" onclick="copyAll()">📋 一鍵複製全部紀錄</button>
-        <button class="export-btn export-print" onclick="window.print()">🖨 列印此頁</button>
-        <span class="copy-feedback" id="copy-feedback">✓ 已複製！</span>
-      </div>
-      ${row('開場破冰・各組工具與情境關鍵字', p3)}
-      ${row('現況攤牌・問題 1 各組回應', p5q0)}
-      ${row('現況攤牌・問題 2 各組回應', p5q1)}
-      ${row('現況攤牌・問題 3 各組回應', p5q2)}
-
-      ${row('痛點共鳴・AI 的問題', p7ai)}
-      ${row('痛點共鳴・自己的問題', p7s)}
-      <div class="summary-entry">
-        <div class="summary-entry-title">📌 工具角色對齊・各步驟工具</div>
-        <div class="summary-content">${escHtml(toolRows)}</div>
-      </div>
-    </div>`;
-  }
-}
 
 ];
 
