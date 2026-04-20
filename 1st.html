@@ -510,7 +510,6 @@ const PAGES = [
         <div class="col-item">每次都要重新設定，很麻煩</div>
       </div>
     </div>
-    <div style="font-size:0.88rem;color:var(--text-mid);margin-top:8px;">「左邊是 AI 本身的限制，短期很難改變。右邊是使用方式的問題，其實是可以解決的。」</div>
   </div>
   <div class="card">
     <div class="whiteboard-label" style="margin-bottom:10px;">📝 現場收集的痛點（左右對照記錄）</div>
@@ -527,7 +526,39 @@ const PAGES = [
   </div>`
 },
 
-// ══ 9 / 14  第四段・工具角色對齊・引言投影片 ══════════════════
+// ══ 10 / 16  痛點彙整（新增頁）════════════════════════════════
+{
+  section:'第三段・痛點共鳴',title:'痛點彙整',
+  notes:`<div class="script">「我看一下大家填的——左邊這些，是 AI 本身的問題，目前我們改不了。但右邊這些，每一條都是我們自己可以優化的。今天接下來的討論，我們就專注在右邊。」</div>
+  <div class="bridge">過場語：「右邊的問題有一個共通點：都跟『流程』有關。不知道問什麼、沒有固定流程、不知道哪裡確認——這些不是 AI 的問題，是我們還沒建立好的習慣。接下來，我們來看看工具怎麼放進這個流程。」</div>`,
+  render:()=>{
+    const ai=whiteboardData['7_ai']||'', self=whiteboardData['7_self']||'';
+    return `
+    <div class="card">
+      <div class="section-header">
+        <div class="section-time-badge">⏱ 第三段</div>
+        <div class="section-h">把痛點分成兩類，聚焦右邊</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:14px;align-items:stretch;">
+        <div style="background:#FEF2F2;border:1px solid #FECACA;border-radius:10px;padding:14px 16px;opacity:0.75;">
+          <div style="font-size:0.82rem;font-weight:700;color:#DC2626;margin-bottom:8px;">⚠ AI 的問題（短期難改）</div>
+          <div style="font-size:0.93rem;line-height:1.75;white-space:pre-wrap;color:#7F1D1D;">${ai?escHtml(ai):'<span style="color:#94A3B8;font-style:italic;">（尚未填寫）</span>'}</div>
+        </div>
+        <div style="background:#F0FDF4;border:2px solid #059669;border-radius:10px;padding:14px 18px;box-shadow:0 2px 12px rgba(5,150,105,0.15);">
+          <div style="font-size:0.82rem;font-weight:700;color:#059669;margin-bottom:4px;">✅ 我們自己的問題（可以解決）</div>
+          <div style="font-size:0.72rem;color:#065F46;margin-bottom:10px;font-weight:600;letter-spacing:0.04em;">← 今天聚焦這邊</div>
+          <div style="font-size:1rem;line-height:1.8;white-space:pre-wrap;color:#064E3B;font-weight:600;">${self?escHtml(self):'<span style="color:#94A3B8;font-style:italic;font-weight:400;">（尚未填寫）</span>'}</div>
+        </div>
+      </div>
+      <div style="margin-top:14px;background:#1A3A5C;color:white;border-radius:8px;padding:12px 18px;font-size:0.95rem;line-height:1.65;">
+        「左邊是 AI 本身的限制，短期很難改變。<br>
+        右邊是<strong>使用方式的問題</strong>，其實是可以解決的。」
+      </div>
+    </div>`;
+  }
+},
+
+// ══ 11 / 16  第四段・工具角色對齊・引言投影片 ══════════════════
 {
   section:'第四段・工具角色對齊',title:'段落引言',
   notes:`<div class="script">「在回答這個問題之前，我想先把流程的骨架固定下來，這樣大家說工具的時候，我們說的是同一件事。」</div>
