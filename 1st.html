@@ -410,20 +410,39 @@ const PAGES = [
           </div>
         </div>`).join('')}
       </div>
-    </div>
-    <div class="card">
-      <div style="font-size:0.88rem;font-weight:700;color:var(--text-mid);margin-bottom:8px;">白板整理（約第 23 分鐘畫出流程骨架）</div>
-      <div class="flow-diagram">
-        <div class="flow-step">拿到資料</div>
-        <div class="flow-step">理解內容<div class="flow-step-sub">AI 在這裡？</div></div>
-        <div class="flow-step">整理重點<div class="flow-step-sub">AI 在這裡？</div></div>
-        <div class="flow-step">產出成品</div>
-      </div>
     </div>`;
   }
 },
 
-// ══ 7 / 14  第三段・痛點共鳴・引言投影片 ════════════════════
+// ══ 7 / 15  第二段・流程骨架（新增頁）══════════════════════════
+{
+  section:'第二段・現況攤牌',title:'流程骨架',
+  notes:`<div class="script">「我把大家剛才說的動作整理一下，其實都可以套進這個骨架：拿到資料 → 理解內容 → 整理重點 → 產出成品。AI 可以介入的地方，是中間這三個步驟——但每個人介入的位置不一樣、深度也不一樣。」</div>
+  <div class="bridge">過場語：「好，我看一下這個流程圖——大家的動作其實都有了，工具也都在用。但如果這個流程跑得很順，我們今天就不用開會了。（停頓）所以我想問一個比較直接的問題：哪一個步驟，讓你最崩潰？」</div>`,
+  render:()=>`
+  <div class="card">
+    <div class="section-header">
+      <div class="section-time-badge">⏱ 第二段</div>
+      <div class="section-h">大家說的動作，都可以套進這個骨架</div>
+    </div>
+    <div class="flow-diagram" style="margin:16px 0;">
+      <div class="flow-step">拿到資料</div>
+      <div class="flow-step">理解內容<div class="flow-step-sub">AI 在這裡？</div></div>
+      <div class="flow-step">整理重點<div class="flow-step-sub">AI 在這裡？</div></div>
+      <div class="flow-step">產出成品</div>
+    </div>
+    <div style="font-size:0.97rem;color:var(--text-mid);line-height:1.75;margin-top:8px;">
+      每個人介入 AI 的位置不同，深度也不同<br>
+      <span style="font-size:0.88rem;">→ 接下來我們來聊：哪個步驟讓你最崩潰？</span>
+    </div>
+  </div>
+  <div class="card whiteboard-wrap">
+    <div class="whiteboard-label">📝 各組流程骨架記錄（AI 介入哪個步驟？）</div>
+    <textarea id="whiteboard" class="whiteboard" placeholder="A組：理解內容這步丟給 NotebookLM&#10;B組：整理重點自己來，產出成品用 AI 起草&#10;..." rows="6" oninput="autoSave()"></textarea>
+  </div>`
+},
+
+// ══ 8 / 15  第三段・痛點共鳴・引言投影片 ════════════════════
 {
   section:'第三段・痛點共鳴',title:'段落引言',
   notes:`<div class="script">「我先說一個我自己的觀察：很多人用 AI 做技術摘要，結果出來的東西看起來很完整，但你一看就知道不能用。這種感覺你們有沒有？」</div>
@@ -659,6 +678,7 @@ const PAGES = [
   render:()=>{
     const p3=whiteboardData[3]||'';
     const p5q0=whiteboardData['5_q0']||'', p5q1=whiteboardData['5_q1']||'', p5q2=whiteboardData['5_q2']||'';
+    const p6=whiteboardData[6]||'';
     const p7ai=whiteboardData['7_ai']||'', p7s=whiteboardData['7_self']||'';
     const p9s1=whiteboardData['9_s1']||'', p9s2=whiteboardData['9_s2']||'', p9s3=whiteboardData['9_s3']||'', p9s4=whiteboardData['9_s4']||'';
     const row=(label,content)=>`<div class="summary-entry">
@@ -676,6 +696,7 @@ const PAGES = [
       ${row('現況攤牌・問題 1 各組回應', p5q0)}
       ${row('現況攤牌・問題 2 各組回應', p5q1)}
       ${row('現況攤牌・問題 3 各組回應', p5q2)}
+      ${row('流程骨架・各組 AI 介入位置', p6)}
       ${row('痛點共鳴・AI 的問題', p7ai)}
       ${row('痛點共鳴・自己的問題', p7s)}
       <div class="summary-entry">
@@ -695,6 +716,7 @@ function copyAll(){
   text+=`【現況攤牌・問題 1】\n${whiteboardData['5_q0']||'（無記錄）'}\n\n`;
   text+=`【現況攤牌・問題 2】\n${whiteboardData['5_q1']||'（無記錄）'}\n\n`;
   text+=`【現況攤牌・問題 3】\n${whiteboardData['5_q2']||'（無記錄）'}\n\n`;
+  text+=`【流程骨架・各組 AI 介入位置】\n${whiteboardData[6]||'（無記錄）'}\n\n`;
   text+=`【痛點共鳴・AI 的問題】\n${whiteboardData['7_ai']||'（無記錄）'}\n\n`;
   text+=`【痛點共鳴・自己的問題】\n${whiteboardData['7_self']||'（無記錄）'}\n\n`;
   text+=`【工具角色對齊】\n拿到資料：${whiteboardData['9_s1']||'（未填）'}\n理解內容：${whiteboardData['9_s2']||'（未填）'}\n整理重點：${whiteboardData['9_s3']||'（未填）'}\n產出成品：${whiteboardData['9_s4']||'（未填）'}\n人工確認：永遠是人\n\n`;
